@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+  <h1>PC返却</h1>
+  {% if lendings %}
+  <form method="post">
+    <label>返却する端末</label>
+    <select name="lending_id" required>
+      {% for l in lendings %}<option value="{{ l['id'] }}">{{ l['asset_no'] }} / {{ l['model_name'] }} / 期限 {{ l['due_date'] }}</option>{% endfor %}
+    </select>
+    <div class="actions"><button class="primary">返却する</button></div>
+  </form>
+  {% else %}
+    <div class="alert info">現在借りている端末はありません。</div>
+  {% endif %}
+</section>
+{% endblock %}
