@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+  <h1>{{ title }}</h1>
+  <div class="alert error large">{{ message }}</div>
+  <div class="detail-box">{{ detail }}</div>
+  <div class="actions"><a class="button secondary" href="{{ url_for('loan_form') }}">貸出申請へ戻る</a></div>
+</section>
+{% endblock %}
