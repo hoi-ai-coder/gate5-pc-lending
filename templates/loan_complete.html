@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card success-card">
+  <div class="icon">✓</div>
+  <h1>貸出が完了しました</h1>
+  <p class="big-message">{{ device['asset_no'] }} を貸し出しました。</p>
+  <p>返却予定日は <strong>{{ due_date }}</strong> です。</p>
+  <div class="actions"><a class="button primary" href="{{ url_for('loan_form') }}">貸出申請へ戻る</a></div>
+</section>
+{% endblock %}
