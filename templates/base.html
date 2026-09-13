@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title or 'PC貸出管理' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <div class="brand">IT資産管理システム</div>
+  <nav><a href="{{ url_for('loan_form') }}">貸出申請</a><a href="{{ url_for('return_device') }}">返却</a></nav>
+</header>
+<main class="container">
+  {% if employee %}
+  <div class="userbar">利用者：<strong>{{ employee['name'] }}</strong>（{{ employee['department'] }} / {{ employee['employment_status'] }}）</div>
+  {% endif %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>
