@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+  <h1>PC貸出申請</h1>
+  <p class="lead">共用ノートPCの貸出申請を行います。</p>
+  {% if not devices %}
+    <div class="alert info">現在貸出可能なPCはありません。</div>
+  {% endif %}
+  <form method="post" class="form-grid">
+    <label>機種 <span class="required">必須</span></label>
+    <select name="device_id" {% if not devices %}disabled{% endif %} required>
+      <option value="">選択してください</option>
+      {% for d in devices %}
+      <option value="{{ d['id'] }}" {% if form.get('device_id')|string == d['id']|string %}selected{% endif %}>{{ d['asset_no'] }} / {{ d['model_name'] }}</option>
+      {% endfor %}
+    </select>
+
+    <label>返却予定日 <span class="required">必須</span></label>
+    <input type="date" name="due_date" value="{{ form.get('due_date','') }}" required>
+
+    <label>利用目的 <span class="required">必須</span></label>
+    <textarea name="purpose" maxlength="100" placeholder="例：顧客訪問で使用" required>{{ form.get('purpose','') }}</textarea>
+    <div class="actions"><button class="primary" {% if not devices %}disabled{% endif %}>確認画面へ</button></div>
+  </form>
+</section>
+<section class="card sub">
+  <h2>デモ利用者の切替</h2>
+  <p><a href="{{ url_for('switch_user', user_id=1) }}">ACTIVE社員</a> / <a href="{{ url_for('switch_user', user_id=2) }}">休職社員</a> / <a href="{{ url_for('switch_user', user_id=3) }}">退職社員</a></p>
+</section>
+{% endblock %}
