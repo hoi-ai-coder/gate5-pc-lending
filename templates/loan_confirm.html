@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+  <h1>貸出内容の確認</h1>
+  <dl class="summary">
+    <dt>端末</dt><dd>{{ device['asset_no'] }} / {{ device['model_name'] }}</dd>
+    <dt>返却予定日</dt><dd>{{ pending['due_date'] }}</dd>
+    <dt>利用目的</dt><dd>{{ pending['purpose'] }}</dd>
+  </dl>
+  <form method="post">
+    <input type="hidden" name="request_token" value="{{ pending['request_token'] }}">
+    <div class="actions"><a class="button secondary" href="{{ url_for('loan_form') }}">戻る</a><button class="primary">確定</button></div>
+  </form>
+</section>
+{% endblock %}
